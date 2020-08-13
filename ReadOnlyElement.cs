@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -43,6 +44,12 @@ namespace ReadOnlyElements
 			return isReadOnly;
 		}
 
+		private static bool AreAllFieldsReadOnly()
+		{
+			var typeInfo = typeof(T).GetTypeInfo();
+			return typeInfo.DeclaredFields.All(d => d.Attributes.ToString().Contains("InitOnly"));
+		}
+
 		public static System.Collections.ObjectModel.ReadOnlyCollection<ReadOnlyElement<T>> GetReadOnlyList(params T[] elements)
 		{
 			return GetReadOnlyList(elements.ToList());
@@ -50,7 +57,7 @@ namespace ReadOnlyElements
 
 		public static System.Collections.ObjectModel.ReadOnlyCollection<ReadOnlyElement<T>> GetReadOnlyList(IEnumerable<T> elements)
 		{
-			if (typeof(T).IsValueType || CheckForReadOnlyObject())
+			if (typeof(T).IsValueType || (AreAllFieldsReadOnly() && CheckForReadOnlyObject()))
 			{
 				List<ReadOnlyElement<T>> list = new List<ReadOnlyElement<T>>();
 				elements.ToList().ForEach(e => {
