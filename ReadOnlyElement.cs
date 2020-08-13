@@ -46,6 +46,10 @@ namespace ReadOnlyElements
 
 		private static bool AreAllFieldsReadOnly()
 		{
+			if(typeof(T).FullName==typeof(System.String).FullName)
+			{
+				return true;
+			}
 			var typeInfo = typeof(T).GetTypeInfo();
 			return typeInfo.DeclaredFields.All(d => d.Attributes.ToString().Contains("InitOnly"));
 		}
