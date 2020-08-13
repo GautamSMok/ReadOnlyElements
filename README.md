@@ -25,19 +25,19 @@ var p2 = new Product("Paste", 100.0);
 var list = ReadOnlyElement<Product>.GetReadOnlyList(new List<Product>{p1,p2});
 
 public class Product
-	{
-		public Product(string name, double price)
-		{
-			_name = name;
-			_price = price;
-		}
+{
+public Product(string name, double price)
+{
+	_name = name;
+	_price = price;
+}
 
-		private readonly string _name;
-		public string Name { get { return _name; } }
-		private readonly double _price;
-		public double Price { get { return _price; } }
+private readonly string _name;
+public string Name { get { return _name; } }
+private readonly double _price;
+public double Price { get { return _price; } }
 
-	}
+}
 ```
 
 The list in above example will now allow to add any new Product object
@@ -48,4 +48,4 @@ Install it from Nuget using following command
 ```
 Install-Package ReadOnlyElement
 ```
-Or download 'ReadOnlyElement.dll' and add it as reference in your project and start using
+Or download 'ReadOnlyElement.dll' and add it as reference in your project and start using it.
