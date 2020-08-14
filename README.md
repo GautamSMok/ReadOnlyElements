@@ -45,7 +45,7 @@ public double Price { get { return _price; } }
 }
 ```
 
-The list in above example will now allow to add any new Product object
+The list in above example will not allow to add any new Product object
 
 ### How to install
 
